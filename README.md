@@ -59,11 +59,44 @@ curl -X POST http://127.0.0.1:8000/predict ^
 
 ## Test
 
+Jalankan semua test case:
+
 ```bash
-pytest
+pytest -v
 ```
 
-Kasus: health, prediksi positif, prediksi negatif, trim spasi, teks kosong (422), field `text` hilang (422), teks terlalu panjang (422).
+Output yang benar: `7 passed`.
+
+Jalankan satu per satu (opsional):
+
+```bash
+pytest tests/test_api.py::test_health -v
+pytest tests/test_api.py::test_predict_positive -v
+pytest tests/test_api.py::test_predict_negative -v
+pytest tests/test_api.py::test_predict_strips_whitespace -v
+pytest tests/test_api.py::test_predict_blank_text_returns_422 -v
+pytest tests/test_api.py::test_predict_missing_text_returns_422 -v
+pytest tests/test_api.py::test_predict_too_long_returns_422 -v
+```
+
+Daftar kasus:
+
+| Test | Skenario | Ekspektasi |
+| --- | --- | --- |
+| `test_health` | `GET /health` | `200`, `{"status": "healthy"}` |
+| `test_predict_positive` | Teks positif | `200`, sentimen `positive` |
+| `test_predict_negative` | Teks negatif | `200`, sentimen `negative` |
+| `test_predict_strips_whitespace` | Teks dengan spasi di awal/akhir | `200`, teks di-trim |
+| `test_predict_blank_text_returns_422` | Teks hanya spasi | `422` |
+| `test_predict_missing_text_returns_422` | Body tanpa `text` | `422` |
+| `test_predict_too_long_returns_422` | Teks > 5000 karakter | `422` |
+
+Test bisa juga dijalankan di dalam image Docker:
+
+```bash
+docker build -t sentiment-api .
+docker run --rm sentiment-api pytest -v
+```
 
 ## Docker
 

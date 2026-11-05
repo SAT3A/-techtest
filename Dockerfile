@@ -12,7 +12,11 @@ COPY requirements.txt .
 RUN pip install --index-url https://download.pytorch.org/whl/cpu torch \
     && pip install -r requirements.txt
 
+COPY requirements-dev.txt pytest.ini ./
+RUN pip install -r requirements-dev.txt
+
 COPY app ./app
+COPY tests ./tests
 COPY main.py ./
 
 RUN python -c "from transformers import pipeline; pipeline('sentiment-analysis', model='distilbert-base-uncased-finetuned-sst-2-english')"

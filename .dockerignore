@@ -6,7 +6,5 @@ __pycache__/
 .git/
 .gitignore
 README.md
-tests/
-requirements-dev.txt
 *.drawio
 similarity.py
