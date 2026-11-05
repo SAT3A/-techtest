@@ -1,4 +1,16 @@
-# Sentiment Analysis API
+# Technical Test
+
+Repo ini berisi tiga tugas. Pemetaan file:
+
+| Tugas | Isi | File |
+| --- | --- | --- |
+| Task 1 | Implementasi cosine similarity | [`similarity.py`](similarity.py) |
+| Task 2 | Desain arsitektur OCR invoice di AWS (penjelasan + diagram) | [`Task 2.md`](Task%202.md), [`Task 2.drawio`](Task%202.drawio), [`Task 2%20(FIX).drawio`](Task%202%20(FIX).drawio) |
+| Task 3 | Backend FastAPI sentiment analysis (README ini) | `app/`, `tests/`, `Dockerfile`, `requirements*.txt` |
+
+---
+
+# Task 3 — Sentiment Analysis API
 
 Backend FastAPI untuk sentiment analysis customer feedback. Endpoint menerima teks, menjalankan model HuggingFace, lalu mengembalikan sentimen (`positive`/`negative`) beserta confidence.
 
